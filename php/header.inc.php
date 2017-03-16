@@ -6,10 +6,18 @@
  * Time: 08:23
  */
 
+session_start();
 ?>
 <!--Titre -->
 <div class="background2">
     <a href="index.php"><h3>Universal CMS</h3></a>
+    <?php
+    if(isset($_SESSION["useName"])){
+
+        echo '<h6>Bonjour '.$_SESSION["useName"].'</h6>';
+    }
+
+    ?>
 </div>
 
 <div class="background2">
@@ -23,9 +31,20 @@
 
         </div>
 
-        <!-- Lien login -->
-        <div class="medium-2 columns text-right">
-                <a href="loginForm.php" class="button"><b>Login</b></a>
+
+
+
+        <div class="medium-1 columns text-right">
+            <?php
+            if(!isset($_SESSION["useName"])){
+                echo '<a href="loginForm.php" class="button"><b>Login</b></a>';
+            } else {
+
+                echo '<a href="deconnection.php" class="button"><b>LogOut</b></a>';
+            }
+
+            ?>
+
         </div>
 
     </div>

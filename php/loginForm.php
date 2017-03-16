@@ -5,12 +5,11 @@
  * Date: 14.03.2017
  * Time: 08:35
  */
-session_start();
+
 
 include_once ("function.php");
 
 include_once ("header.inc.php");
-
 
 ?>
 
@@ -56,7 +55,6 @@ include_once ("header.inc.php");
 </div>
 
 
-
 <div id="bigSpace">
 
 </div>
@@ -73,7 +71,8 @@ include_once ("footer.inc.php");
 <script src="../js/vendor/foundation.js"></script>
 <script src="../js/app.js"></script>
 
-<!--<script type="text/javascript" src="../js/showPwd.js"></script> -->
+<script type="text/javascript" src="../js/showPwd.js"></script>
+<!--   -->
 
 
 </body>

@@ -27,10 +27,10 @@
             pwd = document.querySelector( "#pwd" ),
             form = document.querySelector( "#login" );
 
-        form.addEventListener( "submit", function( e ) {
+       /* form.addEventListener( "submit", function( e ) {
             e.preventDefault();
         }, false);
-
+*/
         var toggler = new PasswordToggler( checkbox, pwd );
 
     });

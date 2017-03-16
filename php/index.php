@@ -5,6 +5,7 @@
  * Date: 13.03.2017
  * Time: 15:02
  */
+
 ?>
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
@@ -23,6 +24,9 @@
 
 //Ajout du header
 include_once ("header.inc.php");
+
+//$pass= password_hash('.Etml-',PASSWORD_DEFAULT);
+//var_dump($pass);
 
 ?>
 
