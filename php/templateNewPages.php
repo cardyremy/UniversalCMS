@@ -2,14 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: Cardyre
- * Date: 17.03.2017
- * Time:
+ * Date: 14.03.2017
+ * Time: 11:26
  */
+
 include_once ('function.php');
 
-$objconnect = new dbfunction();
+$idParam = ($_GET['id']);
+$objConnect = new dbfunction();
+$ArticleLoad = $objConnect ->articleRequestTemplate($idParam);
+
+//Ajout header
+include_once ("header.inc.php");
 
 ?>
+
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
@@ -17,50 +24,48 @@ $objconnect = new dbfunction();
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Contact</title>
+    <title>CMS</title>
     <link rel="stylesheet" href="../css/foundation.css">
     <link rel="stylesheet" href="../css/app.css">
 </head>
 <body>
 
-<?php
-
-//Ajout du header
-include_once ("header.inc.php");
-
-?>
-
 <div id="space">
 
 </div>
 
-<div class="row ">
-    <div class="text-center">
-        <h1>
+<div class="text-center">
+    <h1>
+        <?php
 
-        </h1>
+        for($j=0; $j<count($ArticleLoad); $j++)
+        {
+            echo $ArticleLoad[$j]['artName'];
+        }
 
-    </div>
-    <div class="medium-12 columns">
+        ?>
+    </h1>
 
-        <h4>Test</h4>
+</div>
 
+<div class="row">
+    <div class="medium-12 colums">
         <p>
-            Bla bla
+            <?php
+
+            for($j=0; $j<count($ArticleLoad); $j++)
+            {
+                echo $ArticleLoad[$j]['artContent'];
+            }
+            ?>
         </p>
     </div>
-
 </div>
 
 
-
-<div class="background3">
-
-</div>
 
 <?php
-
-//Ajout du footer
+//Ajout footer
 include_once ("footer.inc.php");
 
 ?>

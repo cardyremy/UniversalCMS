@@ -22,6 +22,10 @@ include_once ("header.inc.php");
 </head>
 <body>
 
+<div id="space">
+
+</div>
+
 <div class="text-center">
     <h1>
         About US

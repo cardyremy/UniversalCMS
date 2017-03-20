@@ -20,12 +20,12 @@ $error=''; // Variable d'erreur
 $msg="";
 echo password_hash('.Etml-',PASSWORD_DEFAULT);
 
-if (isset($_POST)) {
+if (isset($_POST))
+{
     if (empty($_POST['strLogin']) || empty($_POST['pwd']))
     {
         $msg = "Veuillez introduire votre nom d'utilisateur et mot de passe !";
         header('Location:index.php?msg='.htmlspecialchars($msg));
-
     }
     else
     {
@@ -40,7 +40,6 @@ if (isset($_POST)) {
               //  $_SESSION['useRights'] = $userConnect[0]['useRights'];
                 $msg = "Bienvenue";
 
-
             }else
             {
                 $msg="Mot de passe incorrect !";
@@ -54,3 +53,8 @@ if (isset($_POST)) {
        header('Location:index.php?msg='.htmlspecialchars($msg));
     }
 }
+
+?>
+
+
+

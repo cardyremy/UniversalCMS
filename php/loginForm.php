@@ -6,7 +6,6 @@
  * Time: 08:35
  */
 
-
 include_once ("function.php");
 
 include_once ("header.inc.php");
@@ -34,7 +33,7 @@ include_once ("header.inc.php");
 <div class="row">
     <div class="medium-6 medium-centered large-4 large-centered columns border-1">
 
-        <form method="POST" action="login.php"  id="login" name="formLogin">
+        <form method="POST" action="login.php" id="login" name="formLogin">
 
             <div class="row column log-in-form">
                 <h4 class="text-center">Log in with you email account</h4>

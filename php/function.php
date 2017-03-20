@@ -58,7 +58,7 @@ class dbfunction
         $this->objectConnection = null;
     }
 
-    public function sendRequestUser($username)
+    public function sendRequestUser($username=null)
     {
         $strSQLRequestUser = "select * from t_user  WHERE useName='$username'";
         $query = $this->objectConnection->prepare($strSQLRequestUser);
@@ -69,11 +69,73 @@ class dbfunction
         return $getAll;
     }
 
+    public function sendMenuRequest()
+    {
+        $strSQLRequestUser = "select * from t_menu ";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute();
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
+    }
+
+    public function articleRequest()
+    {
+        $strSQLRequestUser = "select * from t_article ";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute();
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
+    }
+
+    public function articleRequestTemplate($idGet)
+    {
+        $strSQLRequestUser = "select * from t_article WHERE fkMenu ='$idGet'";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute();
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
+    }
+
+    public function InsertMenuInToDB($menu)
+    {
+        $strSQLRequestUser = "INSERT INTO t_menu (menName) VALUES ('$menu')";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute();
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
+    }
+
+    public function InsertArticleInToDB($artName,$artContent,$fkMenu,$user)
+    {
+        $strSQLRequestUser = "INSERT INTO t_article (artName, artContent, fkMenu,fkUser) VALUES (?,?,?,?)";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute(array($artName,$artContent,$fkMenu,$user));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
 
 
+    }
 
+    public function sendMenuId($name)
+    {
+        $strSQLRequestUser = "select idMenu FROM t_menu WHERE menName=?";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute(array($name));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
 
-
+        return $getAll;
+    }
 
 
 

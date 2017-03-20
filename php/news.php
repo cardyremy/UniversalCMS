@@ -6,6 +6,10 @@
  * Time: 11:04
  */
 
+include_once ('function.php');
+
+
+
 include_once ("header.inc.php");
 
 ?>
@@ -22,6 +26,10 @@ include_once ("header.inc.php");
     <link rel="stylesheet" href="../css/app.css">
 </head>
 
+<div id="space">
+
+</div>
+
 <div class="text-center">
     <h1>
         News
@@ -33,7 +41,6 @@ include_once ("header.inc.php");
     <div class="columns">
         <blockquote>
             Tribunos oppressi appellatos appellatos vocabulis termino futurae molitioni ob statuuntur enim pollicitos oppressi nominum Montium sub appellatos vivendi et omnium molitioni molitioni his gentilitatem pollicitos futurae pollicitos omnium omnium futurae praediximus Epigonus gentilitatem enim appellatos ut futurae adminicula omnium et.
-
         </blockquote>
     </div>
 
