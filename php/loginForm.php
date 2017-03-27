@@ -36,16 +36,16 @@ include_once ("header.inc.php");
         <form method="POST" action="login.php" id="login" name="formLogin">
 
             <div class="row column log-in-form">
-                <h4 class="text-center">Log in with you email account</h4>
-                <label>Email
-                    <input name="strLogin" type="text" placeholder="somebody@example.com">
+                <h4 class="text-center">Log in with your username</h4>
+                <label>Username
+                    <input name="strLogin" type="text" placeholder="Username">
                 </label>
                 <label>Password
                     <input id="pwd" name="pwd" type="password" placeholder="Password">
                 </label>
                 <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
                 <input class="button expanded"  type="submit" name="btnLogin" value="Log In" />
-                <p class="text-center"><a href="#">Forgot your password?</a></p>
+                <p class="text-center"><a href="forgotPasswordForm.php">Forgot your password?</a></p>
                 <p class="text-center"><a href="createAccount.php">Create an account</a></p>
             </div>
         </form>

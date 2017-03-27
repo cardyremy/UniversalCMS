@@ -7,6 +7,8 @@
  */
 
 include_once ("header.inc.php");
+header('Content-Type: text/html; charset=utf-8');
+
 
 ?>
 
@@ -20,6 +22,10 @@ include_once ("header.inc.php");
     <title>CMS</title>
     <link rel="stylesheet" href="../css/foundation.css">
     <link rel="stylesheet" href="../css/app.css">
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../plugins/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" src="../js/init-tinymce.js"></script>
 </head>
 <body>
 
@@ -27,13 +33,15 @@ include_once ("header.inc.php");
 
 </div>
 
+
 <div class="text-center">
     <h1>
         Add Menu
     </h1>
 
 </div>
-    <form action="addToDB.php" method="post">
+
+    <form action="addToDB.php" name="addMenu" method="post" enctype="multipart/form-data" >
         <div class="row">
             <div class="large-4 columns">
                 <label>Title
@@ -54,12 +62,20 @@ include_once ("header.inc.php");
             <div class="large-12 columns">
                 <label>
                     Article content
-                    <textarea name="text" placeholder="Article Content"></textarea>
+                    <textarea name="text" class="tinymce" placeholder="Article Content"></textarea>
                 </label>
-                <input class="button"  type="submit" name="btnArticle" value="Submit" />
+
+                    <input type="file" id="imageFile" name="imageFile" class="file-input">
+                <br>
+
+
+                <input class="submit"  type="submit" name="btnArticle" value="Submit" />
             </div>
     </form>
 
+    <div id="bigSpace">
+
+    </div>
     <div id="bigSpace">
 
     </div>

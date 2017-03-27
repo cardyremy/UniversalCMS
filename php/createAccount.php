@@ -33,13 +33,14 @@ include_once ("header.inc.php");
     <div class="large-6 columns medium-centered border-1">
         <div class="signup-panel">
             <p class="welcome"> Create an user account</p>
-            <form>
+
+            <form method="post" action="signUP.php">
                 <div class="row collapse">
-                    <div class="small-2  columns">
+                    <div class="small-2 columns">
                         <span class="prefix"><i class="fi-torso-female"></i></span>
                     </div>
                     <div class="small-10  columns">
-                        <input type="text" placeholder="username">
+                        <input type="text" name="username" maxlength="12" placeholder="username">
                     </div>
                 </div>
                 <div class="row collapse">
@@ -47,7 +48,7 @@ include_once ("header.inc.php");
                         <span class="prefix"><i class="fi-mail"></i></span>
                     </div>
                     <div class="small-10  columns">
-                        <input type="text" placeholder="email">
+                        <input type="text" name="email" placeholder="email">
                     </div>
                 </div>
                 <div class="row collapse">
@@ -55,11 +56,12 @@ include_once ("header.inc.php");
                         <span class="prefix"><i class="fi-lock"></i></span>
                     </div>
                     <div class="small-10 columns ">
-                        <input type="text" placeholder="password">
+                        <input type="password" name="psw" maxlength="12" placeholder="password">
                     </div>
                 </div>
+                <input class="button expanded"  type="submit" name="btnsignUp" value="Sign Up" />
             </form>
-            <a href="#" class="button ">Sign Up! </a>
+
             <p>Already have an account? <a href="loginForm.php">Login here &raquo</a></p>
         </div>
     </div>

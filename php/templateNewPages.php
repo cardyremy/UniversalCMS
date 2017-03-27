@@ -45,7 +45,6 @@ include_once ("header.inc.php");
 
         ?>
     </h1>
-
 </div>
 
 <div class="row">
@@ -62,6 +61,19 @@ include_once ("header.inc.php");
     </div>
 </div>
 
+<div class="row">
+    <div class="medium-12 colums">
+        <p>
+            <?php
+
+            for($j=0; $j<count($ArticleLoad); $j++)
+            {
+                echo '<img src="../imagesUpload/'.$ArticleLoad[$j]['artFiles'].'">';
+            }
+            ?>
+        </p>
+    </div>
+</div>
 
 
 <?php

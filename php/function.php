@@ -5,13 +5,12 @@
  * Date: 14.03.2017
  * Time: 09:30
  */
-
+header('Content-Type: text/html; charset=utf-8');
 class dbfunction
 {
 
 // constantes pour la BD
     const STR_DB_NAME = "db_cmsuniversal";
-
 
     /*********************************************
      * Nom : __construct
@@ -52,12 +51,18 @@ class dbfunction
         }
     }
 
-    //Fonction de déconnection de la base de données
+    /*Fonction de déconnection de la base de données*/
     private function dbDeconnection()
     {
         $this->objectConnection = null;
     }
 
+    /*********************************************
+     * Nom : sendRequestUser
+     * But: Afficher toutes les information de l'utilisateur qui est en parametre
+     * Retour:$getAll
+     * Paramètre:$username
+     * *******************************************/
     public function sendRequestUser($username=null)
     {
         $strSQLRequestUser = "select * from t_user  WHERE useName='$username'";
@@ -68,6 +73,13 @@ class dbfunction
 
         return $getAll;
     }
+
+    /*********************************************
+     * Nom : sendMenuRequest
+     * But: Afficher toutes les informations liés au menu
+     * Retour:$getAll
+     * Paramètre:
+     * *******************************************/
 
     public function sendMenuRequest()
     {
@@ -80,6 +92,12 @@ class dbfunction
         return $getAll;
     }
 
+    /*********************************************
+     * Nom : articleRequest
+     * But: Afficher toutes les information liés aux articles
+     * Retour:$getAll
+     * Paramètre:
+     * *******************************************/
     public function articleRequest()
     {
         $strSQLRequestUser = "select * from t_article ";
@@ -90,7 +108,12 @@ class dbfunction
 
         return $getAll;
     }
-
+    /*********************************************
+     * Nom : articleRequestTemplate
+     * But: Affiche toutes les informations liés aux articles liés au ID en paramètre
+     * Retour:$getAll
+     * Paramètre:
+     * *******************************************/
     public function articleRequestTemplate($idGet)
     {
         $strSQLRequestUser = "select * from t_article WHERE fkMenu ='$idGet'";
@@ -101,31 +124,51 @@ class dbfunction
 
         return $getAll;
     }
-
+    /*********************************************
+     * Nom :InsertMenuInToDB
+     * But:
+     * Retour:
+     * Paramètre:
+     * *******************************************/
     public function InsertMenuInToDB($menu)
     {
         $strSQLRequestUser = "INSERT INTO t_menu (menName) VALUES ('$menu')";
         $query = $this->objectConnection->prepare($strSQLRequestUser);
+
         $rsResult = $query->execute();
+        //var_dump($rsResult);die();
+
         $getAll = $query->fetchAll();
         $query->closeCursor();
 
         return $getAll;
     }
 
-    public function InsertArticleInToDB($artName,$artContent,$fkMenu,$user)
+    /*********************************************
+     * Nom :InsertArticleInToDB
+     * But:
+     * Retour:
+     * Paramètre:
+     * *******************************************/
+    public function InsertArticleInToDB($artName,$artContent,$artFile,$fkMenu,$user)
     {
-        $strSQLRequestUser = "INSERT INTO t_article (artName, artContent, fkMenu,fkUser) VALUES (?,?,?,?)";
+
+        $strSQLRequestUser = "INSERT INTO t_article (artName, artContent,artFiles,fkMenu,fkUser) VALUES (?,?,?,?,?)";
         $query = $this->objectConnection->prepare($strSQLRequestUser);
-        $rsResult = $query->execute(array($artName,$artContent,$fkMenu,$user));
+        $rsResult = $query->execute(array($artName,$artContent,$artFile,$fkMenu,$user));
         $getAll = $query->fetchAll();
         $query->closeCursor();
 
         return $getAll;
 
-
     }
 
+    /*********************************************
+     * Nom :sendMenuId
+     * But: Recupérer l'ID de la table menu
+     * Retour:$getAll
+     * Paramètre: $name
+     * *******************************************/
     public function sendMenuId($name)
     {
         $strSQLRequestUser = "select idMenu FROM t_menu WHERE menName=?";
@@ -137,26 +180,235 @@ class dbfunction
         return $getAll;
     }
 
+    /*********************************************
+     * Nom :idCheck
+     * But: Récupérer les droits de l'utilisateur
+     * Retour:$getAll
+     * Paramètre:
+     * *******************************************/
+    public function idCheck()
+    {
+        $strSQLRequestUser = "select useRights from t_user ";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute();
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
+    }
 
 
+    /*********************************************
+     * Nom :dropDataMenu
+     * But:Supprime les donnés de la table menu en fonction de l'ID
+     * Retour:$isExecuted
+     * Paramètre:$paramID
+     * *******************************************/
+    //Supression table
+    public function dropDataMenu($paramID)
+    {
+        $strSQLDrop = "DELETE FROM t_menu WHERE idMenu=?";
+        $query = $this->objectConnection->prepare($strSQLDrop);
+        $isExecuted = $query->execute(array($paramID));
+        $query->closeCursor();
+
+        return $isExecuted;
+    }
+
+    /*********************************************
+     * Nom :dropDataArticle
+     * But: Supprimer les donnés de la table article en fonction de son FK
+     * Retour:$isExecuted
+     * Paramètre:$paramFk
+     * *******************************************/
+    public function dropDataArticle($paramFk)
+    {
+        $strSQLDrop = "DELETE FROM t_article WHERE fkMenu=?";
+        $query = $this->objectConnection->prepare($strSQLDrop);
+        $isExecuted = $query->execute(array($paramFk));
+        $query->closeCursor();
+
+        return $isExecuted;
+    }
+
+    /*********************************************
+     * Nom :getMenuDataFromID
+     * But:Récupérer toutes les informations du menu en fonction de l'ID
+     * Retour:$getAll
+     * Paramètre:$menuId
+     * *******************************************/
+    public function getMenuDataFromID($menuId)
+    {
+        $strSQLRequestUser = "select * from t_menu WHERE idMenu =? ";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute(array($menuId));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
+    }
 
 
+    /*********************************************
+     * Nom :updDataToDB
+     * But:Mettre a jour la table t_article
+     * Retour:$isExecuted
+     * Paramètre:$artName, $artContent,$artFile,$fkMen
+     * *******************************************/
+    public function updDataToDB($artName, $artContent,$artFile,$fkMen)
+    {
+        //Mettre à jour la table si la valeur du fichier est vide
+        if (($artFile)==null) {
+            $strSQLUpdate = "UPDATE t_article SET artName = ?,artContent=? WHERE fkMenu=? ";
+            $query = $this->objectConnection->prepare($strSQLUpdate);
+            $isExecuted = $query->execute(array($artName, $artContent,$fkMen));
+            $query->closeCursor();
+        }
+        else
+        {
+            $strSQLUpdate = "UPDATE t_article SET artName = ?,artContent=?,artFiles=? WHERE fkMenu=? ";
+            $query = $this->objectConnection->prepare($strSQLUpdate);
+            $isExecuted = $query->execute(array($artName, $artContent,$artFile,$fkMen));
+            $query->closeCursor();
+        }
 
+        return $isExecuted;
+    }
 
+    /*********************************************
+     * Nom :updMenuTitleToDB
+     * But:Mettre à jour la table t_menu
+     * Retour:$menName,$idMen
+     * Paramètre: $isExecuted
+     * *******************************************/
+    public function updMenuTitleToDB($menName,$idMen)
+    {
+        $strSQLUpdate = "UPDATE t_menu SET menName = ? WHERE idMenu = ?";
+        $query = $this->objectConnection->prepare($strSQLUpdate);
+        $isExecuted = $query->execute(array($menName,$idMen));
+        $query->closeCursor();
+        return $isExecuted;
+    }
 
+    /*********************************************
+     * Nom :signUpData
+     * But:Inserer dans la table t_user les information liés à la connection
+     * Retour:$getAll
+     * Paramètre:$strName,$strPwd,$key,$strEmail
+     * *******************************************/
+    public function signUpData($strName,$strPwd,$key,$strEmail)
+    {
 
+        $strSignUpSQL = "INSERT INTO t_user (useName,usePswd,useKey,useEmail) VALUES (?,?,?,?)";
+        $query = $this->objectConnection->prepare($strSignUpSQL);
+        $rsResult = $query->execute(array($strName,$strPwd,$key,$strEmail));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+        return $getAll;
 
+    }
 
+    /*********************************************
+     * Nom : selectForControlUser
+     * But:Récuperer toutes les informations de l'utilisateur en fonction de son nom
+     * Retour:$getAll
+     * Paramètre:$username
+     * *******************************************/
+    public function selectForControlUser($username)
+    {
+        $strSelectUserSQL = "SELECT * FROM t_user WHERE useName=?";
+        $query = $this-> objectConnection->prepare($strSelectUserSQL);
 
+        $rsResult = $query->execute(array($username));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
 
+        return $getAll;
+    }
 
+    /*********************************************
+     * Nom :updateConfirmKey
+     * But:Mettre à jour la valeur de confirmation de l'utilisateur
+     * Retour:$isExecuted
+     * Paramètre:$useName
+     * *******************************************/
+    public function updateConfirmKey ($useName)
+    {
+        $strUpdateSQL = "UPDATE t_user SET useConfirm = '1' WHERE useName =?";
+        $query = $this->objectConnection->prepare($strUpdateSQL);
+        $isExecuted = $query->execute(array($useName));
+        $query->closeCursor();
+        return $isExecuted;
+    }
 
+    /*********************************************
+     * Nom :emailCheckUser
+     * But:Verifier que l'email existe dans la BD
+     * Retour:$getAll
+     * Paramètre:$useEmail
+     * *******************************************/
+    public function emailCheckUser ($useEmail)
+    {
+        $strSelectUserSQL = "SELECT useEmail FROM t_user WHERE useEmail = ?";
+        $query = $this-> objectConnection->prepare($strSelectUserSQL);
 
+        $rsResult = $query->execute(array($useEmail));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
 
+        return $getAll;
+    }
 
+    /*********************************************
+     * Nom :usernameCheck
+     * But:Verifier que l'utilisateur existe dans la BD
+     * Retour:$getAll
+     * Paramètre:$usernameCheck
+     * *******************************************/
+    public function usernameCheck ($usernameCheck)
+    {
+        $strSelectUserSQL = "SELECT useName FROM t_user WHERE useName = ?";
+        $query = $this-> objectConnection->prepare($strSelectUserSQL);
 
+        $rsResult = $query->execute(array($usernameCheck));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
 
+        return $getAll;
+    }
 
+    /*********************************************
+     * Nom :selectDataForPassword
+     * But:Récupérer les informations de l'utilisateur en fonction de son adresse email
+     * Retour:$getAll
+     * Paramètre:$userEmail
+     * *******************************************/
+    public function selectDataForPassword ($userEmail)
+    {
+        $strSelectUserSQL = "SELECT * FROM t_user WHERE useEmail = ?";
+        $query = $this-> objectConnection->prepare($strSelectUserSQL);
+
+        $rsResult = $query->execute(array($userEmail));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
+    }
+
+    /*********************************************
+     * Nom :updatePasswordUser
+     * But:Mettre à jour le champ usePswd de la table t_user
+     * Retour:$isExecuted
+     * Paramètre:$usePaswd,$useEmail
+     * *******************************************/
+    public function updatePasswordUser ($usePaswd,$useEmail)
+    {
+        $strUpdateSQL = "UPDATE t_user SET usePswd = ? WHERE useKey =?";
+        $query = $this->objectConnection->prepare($strUpdateSQL);
+        $isExecuted = $query->execute(array($usePaswd,$useEmail));
+        $query->closeCursor();
+        return $isExecuted;
+    }
 
 
 
