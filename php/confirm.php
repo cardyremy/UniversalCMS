@@ -22,7 +22,51 @@ $loadUserData = $objConnect->selectForControlUser($user);
 if($loadUserData[0]['useKey']== $keyGet){
 
     $insertKeyToDB = $objConnect->updateConfirmKey($user);
-    echo 'Merci de votre inscription';
+
+    ?>
+    <!doctype html>
+    <html class="no-js" lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>CMS</title>
+        <link rel="stylesheet" href="../css/foundation.css">
+        <link rel="stylesheet" href="../css/app.css">
+    </head>
+    <body>
+    <div id="space">
+
+    </div>
+    <div id="space">
+
+    </div>
+    <div class="row">
+        <div class="columns">
+            <div class="text-center">
+
+                <h1 class="text-center">Merci pour votre inscription</h1>
+            </div>
+            <br>
+            <div class="text-center">
+                <img  src="../img/THB.png">
+            </div>
+
+            <div id="bigSpace">
+
+            </div>
+            <div id="bigSpace">
+
+            </div>
+
+        </div>
+    </div>
+
+    </body>
+    </html>
+
+    <?php
 }
 else
 {

@@ -20,6 +20,7 @@ include_once ("header.inc.php");
     <link rel="stylesheet" href="../css/foundation.css">
     <link rel="stylesheet" href="../css/app.css">
     <link href="../foundation-icons/foundation-icons.css" rel="stylesheet">
+    <script src="../js/checkForm.js"></script>
 
 </head>
 
@@ -34,13 +35,13 @@ include_once ("header.inc.php");
         <div class="signup-panel">
             <p class="welcome"> Create an user account</p>
 
-            <form method="post" action="signUP.php">
+            <form method="post" action="signUP.php" onclick="verifPseudo()">
                 <div class="row collapse">
                     <div class="small-2 columns">
                         <span class="prefix"><i class="fi-torso-female"></i></span>
                     </div>
                     <div class="small-10  columns">
-                        <input type="text" name="username" maxlength="12" placeholder="username">
+                        <input type="text" name="username"  maxlength="12" placeholder="username">
                     </div>
                 </div>
                 <div class="row collapse">
@@ -56,7 +57,7 @@ include_once ("header.inc.php");
                         <span class="prefix"><i class="fi-lock"></i></span>
                     </div>
                     <div class="small-10 columns ">
-                        <input type="password" name="psw" maxlength="12" placeholder="password">
+                        <input type="password"  name="psw" maxlength="12" onblur="verifPseudo(this)" placeholder="password">
                     </div>
                 </div>
                 <input class="button expanded"  type="submit" name="btnsignUp" value="Sign Up" />
@@ -66,7 +67,6 @@ include_once ("header.inc.php");
         </div>
     </div>
 </div>
-
 
 <div id="bigSpace">
 

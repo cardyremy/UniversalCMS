@@ -15,39 +15,41 @@ $loadArtData = $objConnect->articleRequestTemplate($idMenu);
 $loadMenData = $objConnect->getMenuDataFromID($idMenu);
 
 
-include_once ("header.inc.php");
+$articleRigthCheck = $objConnect->articleRequestTemplate($idMenu);
 
-?>
+if($articleRigthCheck[0]['artBlock'] != 1)
+{
+    include_once ("header.inc.php");
 
-<!doctype html>
-<html class="no-js" lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    ?>
 
-    <title>CMS</title>
-    <link rel="stylesheet" href="../css/foundation.css">
-    <link rel="stylesheet" href="../css/app.css">
+    <!doctype html>
+    <html class="no-js" lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../plugins/tinymce/tinymce.min.js"></script>
-    <script type="text/javascript" src="../js/init-tinymce.js"></script>
-</head>
-<body>
+        <title>CMS</title>
+        <link rel="stylesheet" href="../css/foundation.css">
+        <link rel="stylesheet" href="../css/app.css">
 
-<div id="space">
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../plugins/tinymce/tinymce.min.js"></script>
+        <script type="text/javascript" src="../js/init-tinymce.js"></script>
+    </head>
+    <body>
 
-</div>
+    <div id="space">
 
-<div class="text-center">
-    <h1>
-        Edit Menu
-    </h1>
+    </div>
 
-</div>
+    <div class="text-center">
+        <h1>
+            Edit Menu
+        </h1>
+    </div>
 
-<form action="updateDB.php?id=<?php echo $idMenu ?>" name="addMenu" method="post" enctype="multipart/form-data" >
     <div class="row">
         <div class="large-4 columns">
             <label>Title
@@ -68,9 +70,9 @@ include_once ("header.inc.php");
         <div class="large-12 columns">
             <label>
                 Article content
-                <textarea name="text" class="tinymce" placeholder="Article Content">
-                    <?php echo $loadArtData[0]['artContent'];?>
-                </textarea>
+                    <textarea name="text" class="tinymce" placeholder="Article Content">
+                        <?php echo $loadArtData[0]['artContent'];?>
+                    </textarea>
             </label>
 
             <input type="file" id="imageFile" name="imageFile" class="file-input" >
@@ -78,25 +80,33 @@ include_once ("header.inc.php");
 
             <input class="submit" type="submit" name="btnArticle" value="Save" />
         </div>
-</form>
 
-<div id="bigSpace">
+        <form action="updateDB.php?id=<?php echo $idMenu ?>" name="addMenu" method="post" enctype="multipart/form-data" ></form>
 
-</div>
-<div id="bigSpace">
+    <div id="bigSpace">
 
-</div>
-</div>
+    </div>
+    <div id="bigSpace">
 
-<?php
-//Ajout footer
-include_once ("footer.inc.php");
+    </div>
+    </div>
 
+    <?php
+    //Ajout footer
+    include_once ("footer.inc.php");
+
+    ?>
+
+    <script src="../js/vendor/jquery.js"></script>
+    <script src="../js/vendor/what-input.js"></script>
+    <script src="../js/vendor/foundation.js"></script>
+    <script src="../js/app.js"></script>
+    </body>
+    </html>
+
+<?php }
+else
+{
+    header('Location: index.php');
+}
 ?>
-
-<script src="../js/vendor/jquery.js"></script>
-<script src="../js/vendor/what-input.js"></script>
-<script src="../js/vendor/foundation.js"></script>
-<script src="../js/app.js"></script>
-</body>
-</html>

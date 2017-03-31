@@ -26,8 +26,8 @@ else
 {
     $pswHashed = password_hash($pswd,PASSWORD_DEFAULT);
     $updToDBPass = $objConnect->updatePasswordUser($pswHashed,$userKey);
-    echo 'Votre mdp a été mis a jour';
-
+    echo 'Votre mot de passe a été mis à jour';
+    header('Refresh:2 index.php');
 }
 
 //$loadUserData = $objConnect->selectForControlUser($user);

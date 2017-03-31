@@ -12,9 +12,19 @@ $idParam = ($_GET['id']);
 //var_dump($idParam);
 $objConnect = new dbfunction();
 
-$dropData = $objConnect->dropDataMenu($idParam);
+$articleRigthCheck = $objConnect->articleRequestTemplate($idParam);
 
-$dropDataArticle = $objConnect->dropDataArticle($idParam);
+if($articleRigthCheck[0]['artBlock']==1)
+{
+    echo 'Impossible de supprimer les articles de la page home !';
+    header('Refresh:1 index.php');
+}
+else
+{
+    $dropData = $objConnect->dropDataMenu($idParam);
 
-header('Location: index.php');
+    $dropDataArticle = $objConnect->dropDataArticle($idParam);
+    header('Location: index.php');
+}
+
 

@@ -5,9 +5,12 @@
  * Date: 21.03.2017
  * Time: 13:50
  */
+header('Content-Type: text/html; charset=utf-8');
+
 include_once ('function.php');
 $objConnect = new dbfunction();
 
+//Recuperer les valeurs du formulaire
 $username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['psw'];

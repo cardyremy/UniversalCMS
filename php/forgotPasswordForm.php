@@ -41,7 +41,7 @@ include_once ("header.inc.php");
                     <input name="strLogin" type="text" placeholder="exemple@somebody.com">
                 </label>
 
-                <input class="button expanded"  type="submit" name="btnLogin" value="Log In" />
+                <input class="button expanded"  type="submit" name="btnLogin" value="Send" />
             </div>
         </form>
 

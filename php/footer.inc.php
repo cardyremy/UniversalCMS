@@ -27,9 +27,24 @@
                 <a href="news.php"><p>News</p></a>
             </div>
 
-            <div class="medium-3 columns text-center">
-                <a href="loginForm.php"><p>LogIn</p></a>
-            </div>
+            <?php
+            if(!isset($_SESSION["useName"])){
+                echo '
+                    <div class="medium-3 columns text-center">
+                        <a href="loginForm.php"><p>Login</p></a>
+                    </div>
+                    ';
+
+            } else {
+
+                echo '<div class="medium-3 columns text-center">
+                        <a href="deconnection.php"><p>LogOut</p></a>
+                      </div>
+
+                        ';
+            }
+
+            ?>
 
         </div>
 

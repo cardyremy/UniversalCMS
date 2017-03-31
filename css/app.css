@@ -15,7 +15,7 @@ h3
 .background2
 {
     background-color: dodgerblue;
-    height: 50px;
+    /*height: 40px;*/
 }
 
 ul {
@@ -72,15 +72,17 @@ footer
 
 h6
 {
-
     color: white;
     text-align: center;
     margin: 0px;
-
-
 }
 
 .medium-8
 {
     padding: 0px;
+}
+
+a.button
+{
+    margin: 0px;
 }

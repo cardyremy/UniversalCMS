@@ -1,6 +1,5 @@
-var result = confirm("Want to delete?");
-if (result) {
-    //Logic to delete the item
-}/**
- * Created by Cardyre on 20.03.2017.
- */
+function deleteConf(param)
+{
+    var result = confirm("Voulez-vous vraiment supprimer la page "+ param +"?");
+    return result;
+}

@@ -6,6 +6,8 @@
  * Time: 15:22
  */
 
+header('Content-Type: text/html; charset=utf-8');
+
 // Inclusion des fichiers
 include_once ("function.php");
 

@@ -14,11 +14,9 @@ $username= $_GET['username'];
 $key = $_GET['key'];
 ?>
 
-
 <?php
 
 $loadDataUser = $objConnect->selectForControlUser($username);
-
 
 if($loadDataUser[0]['useKey'] == $key)
 {

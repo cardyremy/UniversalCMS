@@ -22,7 +22,6 @@ class dbfunction
     {
         $this->dbConnection();
     }
-
     /*********************************************
      * Nom : __destruct
      * But: il s'agit du destructeur
@@ -33,7 +32,6 @@ class dbfunction
     {
         $this->dbDeconnection();
     }
-
     /*********************************************
      * Nom : dbConnection
      * But: Etablie la connection à la base de donnée
@@ -152,7 +150,6 @@ class dbfunction
      * *******************************************/
     public function InsertArticleInToDB($artName,$artContent,$artFile,$fkMenu,$user)
     {
-
         $strSQLRequestUser = "INSERT INTO t_article (artName, artContent,artFiles,fkMenu,fkUser) VALUES (?,?,?,?,?)";
         $query = $this->objectConnection->prepare($strSQLRequestUser);
         $rsResult = $query->execute(array($artName,$artContent,$artFile,$fkMenu,$user));
@@ -410,24 +407,72 @@ class dbfunction
         return $isExecuted;
     }
 
+    /*********************************************
+     * Nom :articleHomeSelect
+     * But:
+     * Retour: $getAll;
+     * Paramètre:
+     * *******************************************/
+    public function articleHomeSelect()
+    {
+        $strSQLRequestUser = "select * from t_article WHERE artBlock = '1' ";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute();
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
 
+        return $getAll;
+    }
 
+    /*********************************************
+     * Nom :updDataHomeToDB
+     * But:
+     * Retour: $getAll;
+     * Paramètre:$idArticle
+     * *******************************************/
+    public function updDataHomeToDB($artName, $artContent,$artId)
+    {
+        //Mettre à jour la table si la valeur du fichier est vide
 
+            $strSQLUpdate = "UPDATE t_article SET artName = ?,artContent=? WHERE idArticle=? ";
+            $query = $this->objectConnection->prepare($strSQLUpdate);
+            $isExecuted = $query->execute(array($artName, $artContent,$artId));
+            $query->closeCursor();
 
+        return $isExecuted;
+    }
 
+    public function sendMenuName($idMenu)
+    {
+        $strSQLRequestUser = "select menName from t_menu WHERE idMenu=?";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute(array($idMenu));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
 
+        return $getAll;
+    }
 
+    public function selectAllUser ()
+    {
+        $strSelectUserSQL = "SELECT * FROM t_user ";
+        $query = $this-> objectConnection->prepare($strSelectUserSQL);
 
+        $rsResult = $query->execute();
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
 
+        return $getAll;
+    }
 
-
-
-
-
-
-
-
-
+    public function updateUseRights ($userRights,$useName)
+    {
+        $strUpdateSQL = "UPDATE t_user SET useRights = ? WHERE useName =?";
+        $query = $this->objectConnection->prepare($strUpdateSQL);
+        $isExecuted = $query->execute(array($userRights,$useName));
+        $query->closeCursor();
+        return $isExecuted;
+    }
 
 
 }

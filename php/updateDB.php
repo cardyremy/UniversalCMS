@@ -18,6 +18,7 @@ $articleDetails = $_POST['text'];
 $articleTitle = $_POST['artTitle'];
 $id = $_GET['id'];
 
+
 //var_dump($updtArticleData);
 
 // Constantes
