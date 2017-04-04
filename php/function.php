@@ -144,9 +144,9 @@ class dbfunction
 
     /*********************************************
      * Nom :InsertArticleInToDB
-     * But:
-     * Retour:
-     * Paramètre:
+     * But: Insert les valeurs suivantes dans la DB
+     * Retour:$getAll$getAll;
+     * Paramètre:$artName,$artContent,$artFile,$fkMenu,$user
      * *******************************************/
     public function InsertArticleInToDB($artName,$artContent,$artFile,$fkMenu,$user)
     {

@@ -7,6 +7,8 @@
  */
 
 include_once ('function.php');
+include_once ('header.inc.php');
+
 
 $objConnect = new dbfunction();
 $idMenu = $_GET['id'];
@@ -14,15 +16,9 @@ $idMenu = $_GET['id'];
 $loadArtData = $objConnect->articleRequestTemplate($idMenu);
 $loadMenData = $objConnect->getMenuDataFromID($idMenu);
 
-
 $articleRigthCheck = $objConnect->articleRequestTemplate($idMenu);
 
-if($articleRigthCheck[0]['artBlock'] != 1)
-{
-    include_once ("header.inc.php");
-
-    ?>
-
+?>
     <!doctype html>
     <html class="no-js" lang="en" dir="ltr">
     <head>
@@ -38,12 +34,86 @@ if($articleRigthCheck[0]['artBlock'] != 1)
         <script type="text/javascript" src="../plugins/tinymce/tinymce.min.js"></script>
         <script type="text/javascript" src="../js/init-tinymce.js"></script>
     </head>
-    <body>
+<body>
+
+<?php
+if($idMenu==1)
+{
+    $loadArticle = $objConnect->articleHomeSelect();
+
+    ?> <div id="space">
+
+    </div>
+
+    <div class="text-center">
+        <h1>
+    Edit Home Articles
+    </h1>
+
+    </div>
+
+    <form action="updateHome.php" name="addMenu" method="post" enctype="multipart/form-data" >
+        <div class="row">
+    <?php
+
+    for($i=0;$i<count($loadArticle);$i++)
+    {
+        ?>
+
+        <div class="columns">
+            <label>Article Title<?php echo $i+1 ?>
+                <input name="artTitle<?php echo $i ?>"  type="text" placeholder="Article title" value="<?php echo $loadArticle[$i]['artName']; ?>" />
+            </label>
+        </div>
+        <div class="columns">
+            <label>
+                Article content
+                    <textarea name="text<?php echo $i ?>" class="tinymce" placeholder="Article Content">
+                        <?php echo $loadArticle[$i]['artContent']; ?>
+                    </textarea>
+            </label>
+        </div>
+        <input type="hidden" value="<?php echo $loadArticle[$i]['idArticle']; ?>" name="idArticle<?php echo $i ?>">
+
+    <?php } ?>
+        <div class="columns">
+            <!--
+            <p>Image</p>
+            <input type="file" id="imageFile" name="imageFile" class="file-input" >
+            -->
+            <br>
+            <input class="submit" type="submit" name="btnArticle" value="Save" />
+        </div>
+
+        </div>
+        </div>
+        </form>
+
+
+        <div id="bigSpace">
+
+        </div>
+        <div id="bigSpace">
+
+        </div>
+        </div>
+        </body>
+        <?php
+
+        //Ajout footer
+        include_once ("footer.inc.php");
+
+}
+
+
+else // ($articleRigthCheck[0]['artBlock'] != 1)
+{
+
+    ?>
 
     <div id="space">
 
     </div>
-
     <div class="text-center">
         <h1>
             Edit Menu
@@ -51,45 +121,54 @@ if($articleRigthCheck[0]['artBlock'] != 1)
     </div>
 
     <div class="row">
-        <div class="large-4 columns">
-            <label>Title
-                <input name="title" type="text" placeholder="Menu Title" value="<?php echo $loadMenData[0]['menName'] ?>" />
-            </label>
+        <form action="updateDB.php?id=<?php echo $idMenu?>" name="addMenu" method="post" enctype="multipart/form-data" >
+            <div class="large-4 columns">
+                <label>Title
+                    <input name="title" type="text" placeholder="Menu Title" value="<?php echo $loadMenData[0]['menName'] ?>" />
+                </label>
+            </div>
         </div>
-    </div>
+
+        <div class="row">
+            <div class="large-4 columns">
+                <label>Article Title
+                    <input name="artTitle" type="text" placeholder="Article title" value="<?php echo $loadArtData[0]['artName'] ?>" />
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-12 columns">
+                <label>
+                    Article content
+                        <textarea name="text" class="tinymce" placeholder="Article Content">
+                            <?php echo $loadArtData[0]['artContent'];?>
+                        </textarea>
+                </label>
+
+                <input type="file" id="imageFile" name="imageFile" class="file-input" >
+                <br>
+
+                <input class="submit" type="submit" name="btnArticle" value="Save" />
+            </div>
+
+        </form>
+        </div>
+    <br>
 
     <div class="row">
-        <div class="large-4 columns">
-            <label>Article Title
-                <input name="artTitle" type="text" placeholder="Article title" value="<?php echo $loadArtData[0]['artName'] ?>" />
-            </label>
+            <div class="columns">
+                <img src="../imagesUpload/<?php echo $loadArtData[0]['artFiles'];?>">
+            </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="large-12 columns">
-            <label>
-                Article content
-                    <textarea name="text" class="tinymce" placeholder="Article Content">
-                        <?php echo $loadArtData[0]['artContent'];?>
-                    </textarea>
-            </label>
-
-            <input type="file" id="imageFile" name="imageFile" class="file-input" >
-            <br>
-
-            <input class="submit" type="submit" name="btnArticle" value="Save" />
-        </div>
-
-        <form action="updateDB.php?id=<?php echo $idMenu ?>" name="addMenu" method="post" enctype="multipart/form-data" ></form>
-
     <div id="bigSpace">
 
     </div>
     <div id="bigSpace">
 
     </div>
-    </div>
+
+
 
     <?php
     //Ajout footer
@@ -105,8 +184,8 @@ if($articleRigthCheck[0]['artBlock'] != 1)
     </html>
 
 <?php }
-else
+/*else
 {
     header('Location: index.php');
-}
+}*/
 ?>

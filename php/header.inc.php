@@ -76,6 +76,7 @@ $userInf = $objConnect->idCheck();
             <a onclick="" href="index.php?id=1" class="button"><b>Home</b></a>
             <?php
             //
+            /*
             if(isset($_SESSION['useRights']))
             {
                 if($_SESSION["useRights"] == 2)
@@ -85,7 +86,7 @@ $userInf = $objConnect->idCheck();
             }
             ?>
             <?php
-            //
+            */
             if(isset($_SESSION['useRights'])&& $_SESSION["useRights"] > 0 )
             {
             ?>
@@ -96,6 +97,7 @@ $userInf = $objConnect->idCheck();
 
             }
             $countMenuData = count($loadMenuData);
+            //Parcourt la base de donnée
             for($i=0;$i< $countMenuData;$i++)
             {
             ?>

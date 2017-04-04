@@ -29,6 +29,7 @@ $loadAllInfoUser = $objConnect->selectAllUser();
     <link rel="stylesheet" href="../css/app.css">
 </head>
 <body>
+
 <div id="space">
 
 </div>
@@ -54,7 +55,7 @@ $loadAllInfoUser = $objConnect->selectAllUser();
         </p>
 
         <?php
-        if($_SESSION['useRights']== 2)
+        if($_SESSION['useName']== 'admin')
         {
         ?>
         <p>

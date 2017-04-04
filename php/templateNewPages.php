@@ -68,7 +68,15 @@ include_once ("header.inc.php");
 
             for($j=0; $j<count($ArticleLoad); $j++)
             {
-                echo '<img src="../imagesUpload/'.$ArticleLoad[$j]['artFiles'].'">';
+                   if(empty($ArticleLoad[$j]['artFiles']))
+                   {
+                       echo '';
+                   }
+                   else
+                   {
+                       echo '<img src="../imagesUpload/'.$ArticleLoad[$j]['artFiles'].'">';
+
+                   }
             }
             ?>
         </p>
