@@ -6,17 +6,23 @@
  * Time: 08:38
  */
 
+//inclusion fichiers
 include_once ('function.php');
 include_once ('header.inc.php');
 
-
+// instanciation de l'objet d'interface a la base de donnees
 $objConnect = new dbfunction();
 $idMenu = $_GET['id'];
+$tawoArticles = 2;
 
 $loadArtData = $objConnect->articleRequestTemplate($idMenu);
 $loadMenData = $objConnect->getMenuDataFromID($idMenu);
 
 $articleRigthCheck = $objConnect->articleRequestTemplate($idMenu);
+$artBlockCheck = $objConnect->articleRequestArtBlock($idMenu);
+
+
+
 
 ?>
     <!doctype html>
@@ -89,7 +95,6 @@ if($idMenu==1)
         </div>
         </form>
 
-
         <div id="bigSpace">
 
         </div>
@@ -104,11 +109,167 @@ if($idMenu==1)
         include_once ("footer.inc.php");
 
 }
+else if($articleRigthCheck[0]['artBlock']==3)
+{
+
+    ?> <div id="space">
+
+</div>
+
+    <div class="text-center">
+        <h1>
+            Edit Home Articles
+        </h1>
+
+    </div>
+
+    <form action="updateThreeArticles.php?id=<?php echo $idMenu?>" name="addMenu" method="post" enctype="multipart/form-data" >
+        <div class="row">
+
+            <div class="large-4 columns">
+                <label>Title
+                    <input name="title" type="text" placeholder="Menu Title" value="<?php echo $loadMenData[0]['menName'] ?>" />
+                </label>
+            </div>
+
+            <?php
+
+            $threeArticles =3;
+
+            $loadArtForArtBlock = $objConnect->artSelectWhithArtBlock($threeArticles,$idMenu);
+            for($i=0;$i<count($loadArtForArtBlock);$i++)
+            {
+                ?>
+
+                <div class="columns">
+                    <label>Article Title<?php echo $i+1 ?>
+                        <input name="artTitle<?php echo $i ?>"  type="text" placeholder="Article title" value="<?php echo $loadArtForArtBlock[$i]['artName']; ?>" />
+                    </label>
+                </div>
+                <div class="columns">
+                    <label>
+                        Article content
+                    <textarea name="text<?php echo $i ?>" class="tinymce" placeholder="Article Content">
+                        <?php echo $loadArtForArtBlock[$i]['artContent']; ?>
+                    </textarea>
+                    </label>
+                </div>
+                <input type="hidden" value="<?php echo $loadArtForArtBlock[$i]['idArticle']; ?>" name="idArticle<?php echo $i ?>">
+
+            <?php } ?>
+            <div class="columns">
+
+                <p>Image</p>
+                <input type="file" id="imageFile" name="imageFile" class="file-input" >
+
+                <br>
+                <input class="submit" type="submit" name="btnArticle" value="Save" />
+            </div>
+            <div class="row">
+                <div class="columns">
+                    <img src="../imagesUpload/<?php echo $loadArtData[0]['artFiles'];?>">
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="bigSpace">
+
+    </div>
+    <div id="bigSpace">
+
+    </div>
+    </div>
+
+    </body>
+<?php
+
+//Ajout footer
+include_once ("footer.inc.php");
+}
+else if($articleRigthCheck[0]['artBlock']==2)
+{
+echo "tim 2";
+
+?> <div id="space">
+
+</div>
+
+    <div class="text-center">
+        <h1>
+            Edit Home Articles
+        </h1>
+
+    </div>
+
+    <form action="updateTwoArticles.php?id=<?php echo $loadMenData[0]['idMenu'] ?>" name="addMenu" method="post" enctype="multipart/form-data" >
+        <div class="row">
+
+            <div class="large-4 columns">
+                <label>Title
+                    <input name="title" type="text" placeholder="Menu Title" value="<?php echo $loadMenData[0]['menName'] ?>" />
+                </label>
+            </div>
+
+            <?php
+            $threeArticles =2;
+
+            $loadArtForArtBlock = $objConnect->artSelectWhithArtBlock($threeArticles,$idMenu);
+            for($i=0;$i<count($loadArtForArtBlock);$i++)
+            {
+                ?>
+                <div class="columns">
+                    <label>Article Title<?php echo $i+1 ?>
+                        <input name="artTitle<?php echo $i ?>"  type="text" placeholder="Article title" value="<?php echo $loadArtForArtBlock[$i]['artName']; ?>" />
+                    </label>
+                </div>
+                <div class="columns">
+                    <label>
+                        Article content
+                    <textarea name="text<?php echo $i ?>" class="tinymce" placeholder="Article Content">
+                        <?php echo $loadArtForArtBlock[$i]['artContent']; ?>
+                    </textarea>
+                    </label>
+                </div>
+                <input type="hidden" value="<?php echo $loadArtForArtBlock[$i]['idArticle']; ?>" name="idArticle<?php echo $i ?>">
+
+            <?php } ?>
+            <div class="columns">
+
+                <p>Image</p>
+                <input type="file" id="imageFile" name="imageFile" class="file-input" >
+
+                <br>
+                <input class="submit" type="submit" name="btnArticle" value="Save" />
+            </div>
+
+            <div class="row">
+                <div class="columns">
+                    <img src="../imagesUpload/<?php echo $loadArtData[0]['artFiles'];?>">
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+
+    <div id="bigSpace">
+
+    </div>
+    <div id="bigSpace">
+
+    </div>
+    </div>
+    </body>
+<?php
+
+//Ajout footer
+include_once ("footer.inc.php");
+}
 
 
 else // ($articleRigthCheck[0]['artBlock'] != 1)
 {
-
     ?>
 
     <div id="space">
@@ -169,7 +330,6 @@ else // ($articleRigthCheck[0]['artBlock'] != 1)
     </div>
 
 
-
     <?php
     //Ajout footer
     include_once ("footer.inc.php");
@@ -183,9 +343,7 @@ else // ($articleRigthCheck[0]['artBlock'] != 1)
     </body>
     </html>
 
-<?php }
-/*else
-{
-    header('Location: index.php');
-}*/
+<?php
+}
+
 ?>

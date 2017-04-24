@@ -73,7 +73,16 @@ $loadAllInfoUser = $objConnect->selectAllUser();
                        </option>
                 <?php } ?>
             </select>
-            <input type="radio" name="option" value="2"><label>Modification/Supression</label><br>
+            <input type="radio" name="option" value="2"
+            <?php
+            if($_SESSION['useRights']==2)
+            {
+                ?>
+                checked="checked"
+            <?php
+            }
+            ?>
+            ><label>Modification/Supression</label><br>
             <input type="radio" name="option" value="1"><label>Lecture</label><br>
         <input type="submit" value="Save">
         </form>

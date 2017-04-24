@@ -12,6 +12,10 @@ $idParam = ($_GET['id']);
 $objConnect = new dbfunction();
 $ArticleLoad = $objConnect ->articleRequestTemplate($idParam);
 
+$artBlock = $objConnect->articleRequestArtBlock($idParam);
+
+$artBlok= $ArticleLoad[0]['artBlock'];
+
 //Ajout header
 include_once ("header.inc.php");
 
@@ -34,57 +38,111 @@ include_once ("header.inc.php");
 
 </div>
 
-<div class="text-center">
-    <h1>
-        <?php
-
-        for($j=0; $j<count($ArticleLoad); $j++)
-        {
-            echo $ArticleLoad[$j]['artName'];
-        }
-
-        ?>
-    </h1>
-</div>
-
-<div class="row">
-    <div class="medium-12 colums">
-        <p>
-            <?php
-
-            for($j=0; $j<count($ArticleLoad); $j++)
-            {
-                echo $ArticleLoad[$j]['artContent'];
-            }
-            ?>
-        </p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="medium-12 colums">
-        <p>
-            <?php
-
-            for($j=0; $j<count($ArticleLoad); $j++)
-            {
-                   if(empty($ArticleLoad[$j]['artFiles']))
-                   {
-                       echo '';
-                   }
-                   else
-                   {
-                       echo '<img src="../imagesUpload/'.$ArticleLoad[$j]['artFiles'].'">';
-
-                   }
-            }
-            ?>
-        </p>
-    </div>
-</div>
-
-
 <?php
+if($ArticleLoad[0]['artBlock']!=1)
+{
+    if($ArticleLoad[0]['artBlock']==3)
+    {
+        ?>
+        <div class="row small-up-1 medium-up-2 large-up-3">
+
+            <?php
+            for($i=0;$i<count($ArticleLoad);$i++)
+            {
+                ?>
+                <div class="columns ">
+                    <div class="text-center">
+                        <h2><?php echo $ArticleLoad[$i]['artName'] //Affiche le nom d'article ?> </h2>
+                    </div>
+                    <p>
+                        <?php
+                        echo $ArticleLoad[$i]['artContent'] //affiche le contenu;
+                        //var_dump($loadArticle[0]['artContent']);
+                        ?>
+                    </p>
+                </div>
+            <?php } ;?>
+        </div>
+        <?php
+    }
+    else if($ArticleLoad[0]['artBlock']==2)
+    {
+        ?>
+        <div class="row">
+
+            <?php
+            for($i=0;$i<count($ArticleLoad);$i++)
+            {
+                ?>
+                <div class="columns medium-6 ">
+                    <div class="text-center">
+                        <h2><?php echo $ArticleLoad[$i]['artName'] //Affiche le nom d'article ?> </h2>
+
+                    </div>
+                    <p>
+                        <?php
+                        echo $ArticleLoad[$i]['artContent'] //affiche le contenu;
+                        //var_dump($loadArticle[0]['artContent']);
+                        ?>
+                    </p>
+                </div>
+            <?php } ;?>
+        </div>
+        <?php
+    }
+    else
+    {
+        ?>
+
+        <div class="row">
+
+            <?php
+            for($i=0;$i<count($ArticleLoad);$i++)
+            {
+                ?>
+                <div class="columns medium-12 ">
+                    <div class="text-center">
+                        <h1><?php echo $ArticleLoad[$i]['artName'] //Affiche le nom d'article ?> </h1>
+
+                    </div>
+                    <p>
+                        <?php
+                        echo $ArticleLoad[$i]['artContent'] //affiche le contenu;
+                        //var_dump($loadArticle[0]['artContent']);
+                        ?>
+                    </p>
+                </div>
+            <?php } ;?>
+        </div>
+        <?php
+    }
+    ?>
+
+
+    <div class="row">
+        <div class="medium-12 colums">
+            <p>
+                <?php
+
+                for($j=0; $j<count($ArticleLoad); $j++)
+                {
+                    if(empty($ArticleLoad[$j]['artFiles']))
+                    {
+                        echo '';
+                    }
+                    else
+                    {
+                        echo '<img src="../imagesUpload/'.$ArticleLoad[$j]['artFiles'].'">';
+
+                    }
+                }
+                ?>
+            </p>
+        </div>
+    </div>
+        <?php
+}
+
 //Ajout footer
 include_once ("footer.inc.php");
 

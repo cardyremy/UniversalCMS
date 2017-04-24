@@ -76,8 +76,6 @@ else
     echo "Le mail n'est pas correct!";
 }
 
-
-
 /*
 for($i=0;$i<count($loadUserMail);$i++)
 {

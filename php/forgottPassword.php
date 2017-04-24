@@ -5,20 +5,25 @@
  * Date: 24.03.2017
  * Time: 10:17
  */
-
+//Inclusion fichier
 include_once "function.php";
+
+// instanciation de l'objet d'interface a la base de donnees
 
 $objConnect = new dbfunction();
 
+//recuperation du nom d'utilisateur
 $email = $_POST['strLogin'];
 
 $loadUserData = $objConnect->selectDataForPassword($email);
 $username = $loadUserData[0]['useName'];
 $key = $loadUserData[0]['useKey'];
 
+//Verifie le bon format de l'email
 if (preg_match('#^[\w.-]+@[\w.-]+\.[a-z]{2,6}$#i', $email))
 {
 
+    //Variables pour la fonction mail
     $from = "MIME-Version: 1.0"."\r\n";
     $from .= "Content-type: text/html; charset=utf-8"."\r\n";
 

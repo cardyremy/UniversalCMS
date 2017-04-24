@@ -63,7 +63,7 @@ $userInf = $objConnect->idCheck();
             }
             ?>
 
-        <a href="menuAddForm.php"><img src="../img/add2.png" style="height: 30px; width: 30px"><b style="color: white">Ajout</b> </a>
+        <a href="chooseTemplate.php"><img src="../img/add2.png" style="height: 30px; width: 30px"><b style="color: white">Ajout</b> </a>
         <a href="editForm.php?id=<?php echo $_GET['id'];?>"><img src="../img/edit2.png" style="height: 25px; width: 25px" alt="info"><b style="color: white">Edition</b></a>
         <a onclick=" return deleteConf('<?php if (isset($_GET['id'])) { echo $menuName[0]['menName']; }?>');" href="deleteMenuArticle.php?id=<?php echo $_GET['id']; ?>" ><img src="../img/delete.png" style="height: 25px; width: 25px"><b style="color: white">Supression</b></a>
 

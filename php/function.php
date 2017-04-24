@@ -409,9 +409,9 @@ class dbfunction
 
     /*********************************************
      * Nom :articleHomeSelect
-     * But:
+     * But: Afficher les articles sur la page d'accueil
      * Retour: $getAll;
-     * Paramètre:
+     * Paramètre:$getAll
      * *******************************************/
     public function articleHomeSelect()
     {
@@ -426,9 +426,9 @@ class dbfunction
 
     /*********************************************
      * Nom :updDataHomeToDB
-     * But:
-     * Retour: $getAll;
-     * Paramètre:$idArticle
+     * But: Mettre à jour les champs du nom et du contenu des articles de la page d'accueil
+     * Retour: $isExecuted
+     * Paramètre: $artName, $artContent,$artId
      * *******************************************/
     public function updDataHomeToDB($artName, $artContent,$artId)
     {
@@ -441,7 +441,12 @@ class dbfunction
 
         return $isExecuted;
     }
-
+    /*********************************************
+     * Nom :sendMenuName
+     * But: Afficher les nom des menus en fonction de l'id
+     * Retour: $getAll;
+     * Paramètre:$idMenu
+     * *******************************************/
     public function sendMenuName($idMenu)
     {
         $strSQLRequestUser = "select menName from t_menu WHERE idMenu=?";
@@ -453,7 +458,13 @@ class dbfunction
         return $getAll;
     }
 
-    public function selectAllUser ()
+    /*********************************************
+     * Nom :selectAllUser
+     * But: Recupère toutes les informations liés à l'utilisateur
+     * Retour:$getAll;
+     * Paramètre:-
+     * *******************************************/
+    public function selectAllUser()
     {
         $strSelectUserSQL = "SELECT * FROM t_user ";
         $query = $this-> objectConnection->prepare($strSelectUserSQL);
@@ -464,8 +475,13 @@ class dbfunction
 
         return $getAll;
     }
-
-    public function updateUseRights ($userRights,$useName)
+    /*********************************************
+     * Nom :updateUseRights
+     * But: Mettre à jour les champs des droits sur les utilisateurs
+     * Retour:$isExecuted;
+     * Paramètre:$userRights,$useName
+     * *******************************************/
+    public function updateUseRights($userRights,$useName)
     {
         $strUpdateSQL = "UPDATE t_user SET useRights = ? WHERE useName =?";
         $query = $this->objectConnection->prepare($strUpdateSQL);
@@ -473,7 +489,100 @@ class dbfunction
         $query->closeCursor();
         return $isExecuted;
     }
+    /*********************************************
+     * Nom :updateArtBlock
+     * But: Mettre à jour le champ artBlock en fonction du fkMenu
+     * Retour:$isExecuted
+     * Paramètre:$artBlock,$fkMenu
+     * *******************************************/
+    public function updateArtBlock ($artBlock,$fkMenu)
+    {
+        $strUpdateSQL = "UPDATE t_article SET artBlock = ? WHERE fkMenu =?";
+        $query = $this->objectConnection->prepare($strUpdateSQL);
+        $isExecuted = $query->execute(array($artBlock,$fkMenu));
+        $query->closeCursor();
+        return $isExecuted;
+    }
+    /*********************************************
+     * Nom :InsertArticleInToDBWithoutfiles
+     * But: Insert des valeurs dans la table t_article
+     * Retour:$getAll
+     * Paramètre:$artName,$artContent,$fkMenu,$user
+     * *******************************************/
+    public function InsertArticleInToDBWithoutfiles ($artName,$artContent,$fkMenu,$user)
+    {
+        $strSQLRequestUser = "INSERT INTO t_article (artName, artContent,fkMenu,fkUser) VALUES (?,?,?,?)";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute(array($artName,$artContent,$fkMenu,$user));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
 
+        return $getAll;
+
+    }
+    /*********************************************
+     * Nom :deleteAllArticles
+     * But: Supprime le contenu de la table t_article en fonction du artBlock et du fkMenu
+     * Retour:$isExecuted
+     * Paramètre:$artBlock,$paramFk
+     * *******************************************/
+    public function deleteAllArticles($artBlock,$paramFk)
+    {
+        $strSQLDrop = "DELETE FROM t_article WHERE artBlock=? AND fkMenu=?";
+        $query = $this->objectConnection->prepare($strSQLDrop);
+        $isExecuted = $query->execute(array($artBlock,$paramFk));
+        $query->closeCursor();
+
+        return $isExecuted;
+    }
+    /*********************************************
+     * Nom :articleRequestArtBlock
+     * But: Affiche la valeur de artBlock en fonction du fkMenu
+     * Retour:$getAll
+     * Paramètre:$idGet
+     * *******************************************/
+
+    public function articleRequestArtBlock($idGet)
+    {
+        $strSQLRequestUser = "select artBlock from t_article WHERE fkMenu =?";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute(array($idGet));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
+    }
+    /*********************************************
+     * Nom :artSelectWhithArtBlock
+     * But: Affiche toutes le informations de la table t_article en fonction de artBlock et du fkMenu
+     * Retour:
+     * Paramètre:$artBlock, $idGet
+     * *******************************************/
+    public function artSelectWhithArtBlock($artBlock, $idGet)
+    {
+        $strSQLRequestUser = "select * from t_article WHERE artBlock=? AND fkMenu =?";
+        $query = $this->objectConnection->prepare($strSQLRequestUser);
+        $rsResult = $query->execute(array($artBlock, $idGet));
+        $getAll = $query->fetchAll();
+        $query->closeCursor();
+
+        return $getAll;
+    }
+    /*********************************************
+     * Nom :updMoreArticlesToDB
+     * But: Mettre à jour les champs de la table t_article, du nom, contenu et image en fontion de l'id
+     * Retour:
+     * Paramètre:$artName, $artContent,$artFiles,$artId
+     * *******************************************/
+    public function updMoreArticlesToDB($artName, $artContent,$artFiles,$artId)
+    {
+
+        $strSQLUpdate = "UPDATE t_article SET artName = ?,artContent=?,artFiles=? WHERE idArticle=? ";
+        $query = $this->objectConnection->prepare($strSQLUpdate);
+        $isExecuted = $query->execute(array($artName, $artContent,$artFiles,$artId));
+        $query->closeCursor();
+        return $isExecuted;
+    }
 
 }
 ?>

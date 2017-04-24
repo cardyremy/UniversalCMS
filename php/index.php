@@ -45,6 +45,7 @@ include_once ("header.inc.php");
 <div class="row small-up-1 medium-up-2 large-up-3">
 
 <?php
+//Affichage du contenu de la base de donnés
 for($i=0;$i<count($loadArticle);$i++)
 {
 ?>

@@ -1,41 +1,39 @@
+
 <?php
 /**
  * Created by PhpStorm.
  * User: Cardyre
- * Date: 17.03.2017
- * Time: 11:54
+ * Date: 07.04.2017
+ * Time: 08:38
+ */
+
+/**
+ * Created by PhpStorm.
+ * User: Cardyre
+ * Date: 27.03.2017
+ * Time: 13:59
  */
 
 include_once ('function.php');
-header('Content-Type: text/html; charset=utf-8');
-
-// instanciation de l'objet d'interface a la base de donnees
 $objConnect = new dbfunction();
 
-//Declaration variables
+$menuTitle = $_POST['title'];
+$artTitle1 = $_POST['artTitle0'];
+$artTitle2 = $_POST['artTitle1'];
 
-$templateChoose = $_POST['templateNb'];
+$artContent1 = $_POST['text0'];
+$artContent2 = $_POST['text1'];
 
+$ID1 = $_POST['idArticle0'];
+$ID2 = $_POST['idArticle1'];
 
-$idUser = 1;
-$menuTitle =  ($_POST['title']);
-$articleDetails = $_POST['text'];
-$articleDetails2 = $_POST['text2'];
-$articleDetails3 = $_POST['text3'];
-$articleTitle = htmlentities($_POST['artTitle']);
-$articleTitle2 = htmlentities($_POST['artTitle2']);
-$articleTitle3 = htmlentities($_POST['artTitle3']);
+$id = $_GET['id'];
 
-$insertMenu = $objConnect->InsertMenuInToDB($menuTitle);
-$getMenuId = $objConnect->sendMenuId($menuTitle);
+//var_dump($artContent1);die();
 
-$IdNumber = $getMenuId[0]['idMenu'];
+//echo $artContent2;
 
-//var_dump($IdNumber);
-//var_dump($IdNumber);
-//$insertArticle = $objConnect->InsertArticleInToDB();
-
-//Redirection page d'accueil
+//var_dump($updtArticleData);
 
 // Constantes
 define('TARGET', '../imagesUpload/');    // Repertoire cible
@@ -129,45 +127,30 @@ if(!empty($_POST))
         // Sinon on affiche une erreur pour le champ vide
         echo $message = 'Veuillez remplir le formulaire svp !';
     }
+
 }
 
 // chemin de l'image
-$imgRoute = $nomImage;
+$imgRoute= $nomImage;
 
 // Met dans la variable $InsertNewAlbum la requete se trouvant dans la page de connection à la base données et de requêtes.
-
-
-//Si le choix de l'utilisateur est seulement d'un article, insère les valeurs suivantes
-if($templateChoose==1)
+if(!empty($imgRoute))
 {
-    //Insertion base de donnée
+    $uptMenuTitle = $objConnect->updMenuTitleToDB($menuTitle,$id);
 
-    $insertArticle =$objConnect->InsertArticleInToDB($articleTitle,$articleDetails,$imgRoute,$IdNumber,$idUser);
-}
-//Si le choix de l'utilisateur est de 2 articles, insère les valeurs suivantes
 
-else if($templateChoose == 2)
+    $updateArticlesHome = $objConnect->updMoreArticlesToDB($artTitle1,$artContent1,$imgRoute,$ID1);
+    $updateArticlesHome = $objConnect->updDataHomeToDB($artTitle2,$artContent2,$ID2);
+
+}else
 {
+    $uptMenuTitle = $objConnect->updMenuTitleToDB($menuTitle,$id);
 
-    //Insertion base de donnée
+    $updateArticlesHome = $objConnect->updDataHomeToDB($artTitle1,$artContent1,$ID1);
+    $updateArticlesHome = $objConnect->updDataHomeToDB($artTitle2,$artContent2,$ID2);
 
-    $insertArticle =$objConnect->InsertArticleInToDB($articleTitle,$articleDetails,$imgRoute,$IdNumber,$idUser);
-    $insertArticle2 =$objConnect->InsertArticleInToDBWithoutfiles($articleTitle2,$articleDetails2,$IdNumber,$idUser);
 
-    $artBlock = 2;
-    $updateArtBlock= $objConnect->updateArtBlock($artBlock,$IdNumber);
 }
-//Si le choix de l'utilisateur est de 3 articles, insère les valeurs suivantes
-else if($templateChoose==3)
-{
-    //Insertion base de donnée
 
-    $insertArticle =$objConnect->InsertArticleInToDB($articleTitle,$articleDetails,$imgRoute,$IdNumber,$idUser);
-    $insertArticle2 =$objConnect->InsertArticleInToDBWithoutfiles($articleTitle2,$articleDetails2,$IdNumber,$idUser);
-    $insertArticle3 =$objConnect->InsertArticleInToDBWithoutfiles($articleTitle3,$articleDetails3,$IdNumber,$idUser);
-
-    $artBlock = 3;
-    $updateArtBlock= $objConnect->updateArtBlock($artBlock,$IdNumber);
-}
 
 header('Location: index.php');

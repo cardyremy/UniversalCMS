@@ -8,17 +8,17 @@
 
 include_once ('function.php');
 
+// instanciation de l'objet d'interface a la base de donnees
 $objConnect = new dbfunction();
 
+//declaration variables
 $user = $_GET['username'];
 $keyGet = $_GET['key'];
 
 $loadUserData = $objConnect->selectForControlUser($user);
 
-//echo $user;
-//echo '<br>';
-//echo $keyGet;
 
+//Verifie que la clef correspond à celle de la base de donnés
 if($loadUserData[0]['useKey']== $keyGet){
 
     $insertKeyToDB = $objConnect->updateConfirmKey($user);
