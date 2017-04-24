@@ -21,7 +21,6 @@ include_once ("header.inc.php");
     <link rel="stylesheet" href="../css/app.css">
     <link href="../foundation-icons/foundation-icons.css" rel="stylesheet">
     <script src="../js/checkForm.js"></script>
-
 </head>
 
 <body>
@@ -52,6 +51,7 @@ include_once ("header.inc.php");
                         <input type="text" name="email" placeholder="email">
                     </div>
                 </div>
+
                 <div class="row collapse">
                     <div class="small-2 columns ">
                         <span class="prefix"><i class="fi-lock"></i></span>
@@ -59,7 +59,20 @@ include_once ("header.inc.php");
                     <div class="small-10 columns ">
                         <input type="password"  name="psw" maxlength="12" onblur="verifPseudo(this)" placeholder="password">
                     </div>
+
                 </div>
+
+                <div class="row collapse">
+                    <div class="small-2 columns ">
+
+                    </div>
+
+                    <div class="small-10 columns">
+                        <div class="g-recaptcha" data-sitekey="6LdzZR4UAAAAAERKGuRUYRfZURQ1Os3WistIZ3ix"></div>
+                    </div>
+
+                </div>
+
                 <input class="button expanded"  type="submit" name="btnsignUp" value="Sign Up" />
             </form>
 
@@ -72,17 +85,17 @@ include_once ("header.inc.php");
 
 </div>
 
-
 <?php
 //Ajout footer
 include_once ("footer.inc.php");
 
 ?>
 
-
 <script src="../js/vendor/jquery.js"></script>
 <script src="../js/vendor/what-input.js"></script>
 <script src="../js/vendor/foundation.js"></script>
 <script src="../js/app.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 </body>
 </html>
