@@ -68,7 +68,7 @@ include_once ("header.inc.php");
                     </div>
 
                     <div class="small-10 columns">
-                        <div class="g-recaptcha" data-sitekey="6LdzZR4UAAAAAERKGuRUYRfZURQ1Os3WistIZ3ix"></div>
+                        <div class="g-recaptcha" data-size="" data-type="audio image" data-sitekey="6LdzZR4UAAAAAERKGuRUYRfZURQ1Os3WistIZ3ix"></div><br>
                     </div>
 
                 </div>

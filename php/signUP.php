@@ -9,7 +9,6 @@ header('Content-Type: text/html; charset=utf-8');
 
 include_once ('function.php');
 $objConnect = new dbfunction();
-
 //Recuperer les valeurs du formulaire
 $username = $_POST['username'];
 $email = $_POST['email'];
@@ -30,21 +29,23 @@ if (preg_match('#^[\w.-]+@[\w.-]+\.[a-z]{2,6}$#i', $email))
     }
     else
     {
-        $keyLength = 15;
-        $key ='';
-
-        for($i=0;$i<$keyLength;$i++)
+        if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response'])
         {
-            $key.= mt_rand(0,9);
-        }
+            $keyLength = 15;
+            $key ='';
 
-        $from = "MIME-Version: 1.0"."\r\n";
-        $from .= "Content-type: text/html; charset=utf-8"."\r\n";
+            for($i=0;$i<$keyLength;$i++)
+            {
+                $key.= mt_rand(0,9);
+            }
 
-        $to = $email;
-        $subject = 'Message from Contact Demo ';
-        $result = "";
-        $body = '
+            $from = "MIME-Version: 1.0"."\r\n";
+            $from .= "Content-type: text/html; charset=utf-8"."\r\n";
+
+            $to = $email;
+            $subject = 'Message from Contact Demo ';
+            $result = "";
+            $body = '
 
 <html>
 <body>
@@ -56,19 +57,26 @@ if (preg_match('#^[\w.-]+@[\w.-]+\.[a-z]{2,6}$#i', $email))
 
         ';
 
-        if (mail ($to, $subject, $body, $from)) {
-            $result='<div class="alert alert-success">Thank You! I will be in touch</div>';
-        } else {
-            $result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+            if (mail ($to, $subject, $body, $from)) {
+                $result='<div class="alert alert-success">Thank You! I will be in touch</div>';
+            } else {
+                $result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+            }
+
+            $passwordHashed = password_hash($password,PASSWORD_DEFAULT);
+
+            $insertUserData = $objConnect->signUpData($username,$passwordHashed,$key,$email);
+
+            echo 'Merci pour votre inscription, un mail de validation a été envoye à :'.$email;
+//Redirection page index
+            header ("Refresh:1 index.php");
+        }
+        else
+        {
+            echo 'Veuillez cochez la case je ne suis pas un robot !';
+            header ("Refresh:1 createAccount.php");
         }
 
-        $passwordHashed = password_hash($password,PASSWORD_DEFAULT);
-
-        $insertUserData = $objConnect->signUpData($username,$passwordHashed,$key,$email);
-
-        echo 'Merci pour votre inscription, un mail de validation a été envoye à :'.$email;
-//Redirection page index
-        header ("Refresh:1 index.php");
     }
 }
 else
