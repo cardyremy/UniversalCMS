@@ -1,11 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 16.03.2017
- * Time: 09:20
- */
-
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    16.03.2017
+// But:
+//*********************************************************/
 session_start();
 session_unset();
 session_destroy();

@@ -1,10 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 21.03.2017
- * Time: 13:50
- */
+
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    21.03.2017
+// But:     Création login et envoie email pour confirmation
+//*********************************************************/
 header('Content-Type: text/html; charset=utf-8');
 
 include_once ('function.php');
@@ -31,6 +32,8 @@ if (preg_match('#^[\w.-]+@[\w.-]+\.[a-z]{2,6}$#i', $email))
     {
         if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response'])
         {
+            $secretKey = '6LdzZR4UAAAAAJTLbSDlZuo89kn53ZQ7GtFV6Lpp';
+
             $keyLength = 15;
             $key ='';
 
@@ -49,11 +52,10 @@ if (preg_match('#^[\w.-]+@[\w.-]+\.[a-z]{2,6}$#i', $email))
 
 <html>
 <body>
-            <a href="http://127.0.0.1/projects/php/confirm.php?username='.urlencode($username).'&key='.$key.'">Veuillez cliquer sur ce lien pour confirmer votre inscription </a>
+            <a href="http://127.0.0.1/projects/UniversalCMS/php/confirm.php?username='.urlencode($username).'&key='.$key.'">Veuillez cliquer sur ce lien pour confirmer votre inscription </a>
 
 </body>
 </html>
-
 
         ';
 
@@ -76,7 +78,6 @@ if (preg_match('#^[\w.-]+@[\w.-]+\.[a-z]{2,6}$#i', $email))
             echo 'Veuillez cochez la case je ne suis pas un robot !';
             header ("Refresh:1 createAccount.php");
         }
-
     }
 }
 else
@@ -93,8 +94,6 @@ for($i=0;$i<count($loadUserMail);$i++)
     }
 }
 */
-
-
 ?>
 
 </body>

@@ -1,11 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 14.03.2017
- * Time: 11:26
- */
 
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    14.03.2017
+// But:     Affichage des articles en fonction du menu choisi
+//*********************************************************/
 include_once ('function.php');
 
 $idParam = ($_GET['id']);

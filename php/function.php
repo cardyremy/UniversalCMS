@@ -1,10 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 14.03.2017
- * Time: 09:30
- */
+ /**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    14.03.2017
+// But:     Classe contenant les fonctions
+//**********************************************************/
+
 header('Content-Type: text/html; charset=utf-8');
 class dbfunction
 {

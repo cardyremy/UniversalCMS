@@ -1,11 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 20.03.2017
- * Time: 08:38
- */
 
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    20.03.2017
+// But:
+//*********************************************************/
 include_once ('function.php');
 
 $objConnect = new dbfunction();

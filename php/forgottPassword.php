@@ -1,10 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 24.03.2017
- * Time: 10:17
- */
+
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    24.03.2017
+// But:
+//*********************************************************/
+
 //Inclusion fichier
 include_once "function.php";
 
@@ -36,7 +38,7 @@ if (preg_match('#^[\w.-]+@[\w.-]+\.[a-z]{2,6}$#i', $email))
 <body>
             <h3> Demande de reinitialisation du mot de passe pour le login '.$username.' </h3>
             <p>
-                        <a href="http://127.0.0.1/projects/php/pwdResetConfirm.php?username='.urlencode($username).'&key='.$key.'">Veuillez cliquer sur ce lien pour reinitialiser votre mot de passe ! </a>
+                        <a href="http://127.0.0.1/projects/UniversalCMS/php/pwdResetConfirm.php?username='.urlencode($username).'&key='.$key.'">Veuillez cliquer sur ce lien pour reinitialiser votre mot de passe ! </a>
 
             </p>
 

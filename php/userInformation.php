@@ -1,10 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 13.03.2017
- * Time: 15:02
- */
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    13.03.2017
+// But:     Afficher les information de l'utilisateur et modifier les droit des utilisateurs
+//*********************************************************/
 //Inclusion fichiers
 include_once ('function.php');
 include_once ("header.inc.php");

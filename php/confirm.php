@@ -1,11 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 23.03.2017
- * Time: 10:21
- */
-
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    23.03.2017
+// But:
+//*********************************************************/
 include_once ('function.php');
 
 // instanciation de l'objet d'interface a la base de donnees

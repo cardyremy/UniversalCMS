@@ -1,11 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 16.03.2017
- * Time: 15:31
- */
 
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    16.03.2017
+// But:
+//*********************************************************/
 include_once ("header.inc.php");
 header('Content-Type: text/html; charset=utf-8');
 
@@ -45,7 +45,6 @@ if($getOption==1)
 {
 
 ?>
-
         <form action="addToDB.php" name="addMenu" method="post" enctype="multipart/form-data" >
             <div class="row">
                 <div class="large-4 columns">

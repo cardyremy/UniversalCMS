@@ -1,11 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 15.03.2017
- * Time: 15:22
- */
 
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    15.03.2017
+// But:
+//*********************************************************/
 header('Content-Type: text/html; charset=utf-8');
 
 // Inclusion des fichiers

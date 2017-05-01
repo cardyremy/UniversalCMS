@@ -1,11 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cardyre
- * Date: 20.03.2017
- * Time: 09:32
- */
-
+/**********************************************************
+// Societe: ETML
+// Auteur:  Cardy Remy
+// Date:    20.03.2017
+// But:
+//*********************************************************/
 include_once ('function.php');
 
 $idParam = ($_GET['id']);
