@@ -119,6 +119,14 @@ if($_SESSION['useRights']==2)
 
     }
 
+    $nameFile = $_FILES['file']['name'];
+    $typeFile = $_FILES['file']['type'];
+    $sizeFile = $_FILES['file']['size'];
+    $tmpFile = $_FILES['file']['tmp_name'];
+    $errorFile = $_FILES['file']['error'];
+
+    $tabExtFile = array('docx','pdf');
+
 // chemin de l'image
     $imgRoute= $nomImage;
 

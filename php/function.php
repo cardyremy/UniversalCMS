@@ -149,14 +149,26 @@ class dbfunction
      * Retour:$getAll$getAll;
      * Paramètre:$artName,$artContent,$artFile,$fkMenu,$user
      * *******************************************/
-    public function InsertArticleInToDB($artName,$artContent,$artFile,$fkMenu,$user)
-    {
-        $strSQLRequestUser = "INSERT INTO t_article (artName, artContent,artFiles,fkMenu,fkUser) VALUES (?,?,?,?,?)";
-        $query = $this->objectConnection->prepare($strSQLRequestUser);
-        $rsResult = $query->execute(array($artName,$artContent,$artFile,$fkMenu,$user));
-        $getAll = $query->fetchAll();
-        $query->closeCursor();
+    public function InsertArticleInToDB($artName,$artContent,$artFile,$artFile2,$fkMenu,$user)
 
+    {
+        if($artFile2==null)
+        {
+            $strSQLRequestUser = "INSERT INTO t_article (artName, artContent,artFiles,fkMenu,fkUser) VALUES (?,?,?,?,?)";
+            $query = $this->objectConnection->prepare($strSQLRequestUser);
+            $rsResult = $query->execute(array($artName,$artContent,$artFile,$fkMenu,$user));
+            $getAll = $query->fetchAll();
+            $query->closeCursor();
+
+        }
+        else
+        {
+            $strSQLRequestUser = "INSERT INTO t_article (artName, artContent,artFiles,artUpload,fkMenu,fkUser) VALUES (?,?,?,?,?,?)";
+            $query = $this->objectConnection->prepare($strSQLRequestUser);
+            $rsResult = $query->execute(array($artName,$artContent,$artFile,$artFile2,$fkMenu,$user));
+            $getAll = $query->fetchAll();
+            $query->closeCursor();
+        }
         return $getAll;
 
     }

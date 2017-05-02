@@ -140,6 +140,57 @@ if($ArticleLoad[0]['artBlock']!=1)
             </p>
         </div>
     </div>
+
+    <div class="row">
+        <div class="medium-12 colums">
+            <p>
+                <?php
+
+                for($j=0; $j<count($ArticleLoad); $j++)
+                {
+                    if(empty($ArticleLoad[$j]['artUpload']))
+                    {
+                        echo '';
+                    }
+                    else
+                    {
+                        echo '<a href="../imagesUpload/'.$ArticleLoad[$j]['artUpload'].'" download ="'.$ArticleLoad[$j]['artName'].'"> Download File';
+                        $info = new SplFileInfo($ArticleLoad[$j]['artUpload']);
+                        $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);
+
+                        if($extension == 'pdf')
+                        {
+                            ?>
+                                <img src="../img/pdf.ico" style="height: 40px; width: 40px">
+                            <?php
+                        }
+                        else if($extension == 'docx' || $extension == 'dotx')
+                        {
+                            ?>
+                            <img src="../img/docx.png" style="height: 40px; width: 40px">
+                            <?php
+                        }
+                        else if($extension == 'xlsm')
+                        {
+                            ?>
+                            <img src="../img/XLSM.ico" style="height: 40px; width: 40px">
+                            <?php
+                        }
+                        //var_dump($ArticleLoad[$j]['artUpload']);
+                        echo '<br>
+                        <form action="test.php" method="post" name="Archive" enctype="multipart/form-data">
+                        <input type="hidden" name="upload" value="../imagesUpload/'.$ArticleLoad[$j]['artUpload'].'">
+                        <input type="submit" value="Archive">
+                        </form>
+                         ';
+
+                    }
+                }
+                ?>
+            </p>
+        </div>
+    </div>
+
         <?php
 }
 

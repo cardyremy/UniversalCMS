@@ -68,9 +68,15 @@ if($getOption==1)
                         Article content
                         <textarea name="text" class="tinymce" placeholder="Article Content"></textarea>
                     </label>
-
+                    <label>
+                        Upload picture
+                    </label>
                         <input type="file" id="imageFile" name="imageFile" class="file-input">
                     <br>
+                    <label>
+                        Upload file
+                    </label>
+                    <input type="file" name="file">
 
                     <input type="hidden" value="<?php echo $getOption ?>" name="templateNb">
                     <input class="submit"  type="submit" name="btnArticle" value="Submit" />
@@ -128,6 +134,10 @@ else if($getOption==2)
 
             <input type="file" id="imageFile" name="imageFile" class="file-input">
             <br>
+            <label>
+                Upload file
+            </label>
+            <input type="file" name="file">
 
             <input type="hidden" value="<?php echo $getOption ?>" name="templateNb">
 
@@ -209,6 +219,10 @@ else if($getOption==3)
 
                 <input type="file" id="imageFile" name="imageFile" class="file-input">
                 <br>
+                <label>
+                    Upload file
+                </label>
+                <input type="file" name="file">
 
                 <input type="hidden" value="<?php echo $getOption ?>" name="templateNb">
 
